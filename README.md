@@ -1,3 +1,3 @@
 # JavaRosemont
 TP1 from basic OOP course
-I need to translate the task
+Translation in English in blue. Translations cover only task specific instructions
