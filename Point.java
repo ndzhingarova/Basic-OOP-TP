@@ -5,65 +5,80 @@
  */
 package tp01_p1_nikoletatsvetkova;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ndzhi
  */
-public class Point {
+public class Point implements Serializable{
 
-    private double abscissa;
-    private double ordinate;
+    private double abscisse;
+    private double ordonnee;
 
-    // constructor with no values
+    // Constructeur sans fournir des valeurs initiales
     public Point() {
         this(0, 0);
     }
 
-    // constructor with abscissa
+    // Constructeur en fournissant la valeur initiale de l'abscisse
     public Point(double abscisse) {
         this(abscisse, 0);
     }
 
-    // constructor with abscissa and ordonate
+    // Constructeur en fournissant les deux valeurs initiales
     public Point(double abscisse, double ordonnee) {
-        this.abscissa = abscisse;
-        this.ordinate = ordonnee;
+        this.abscisse = abscisse;
+        this.ordonnee = ordonnee;
     }
 
-    public double getAbscissa() {
-        return abscissa;
+    public double getAbscisse() {
+        return abscisse;
     }
 
-    // Getters and setters 
-    public void setAbscissa(double abscisse) {
-        this.abscissa = abscisse;
+    // Getters and setters début
+    public void setAbscisse(double abscisse) {
+        this.abscisse = abscisse;
     }
 
-    public double getOrdinate() {
-        return ordinate;
+    public double getOrdonnee() {
+        return ordonnee;
     }
 
-    public void setOrdinate(double ordonnee) {
-        this.ordinate = ordonnee;
+    public void setOrdonnee(double ordonnee) {
+        this.ordonnee = ordonnee;
     }
+
     // Getters and setters fin
-
-    // Method to compare two points
-    public boolean Compare(Point point2) {
-        return (abscissa == point2.abscissa) && (ordinate == point2.ordinate);
+    // Methode pour comparaison de deux points
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Point) {
+            return (this.getAbscisse() == ((Point) obj).getAbscisse()) && (this.getOrdonnee() == ((Point) obj).getOrdonnee());
+        } else {
+            return false;
+        }
     }
 
-    // Method to convert a point in String
-    public String ConvertToString() {
-        return "(" + abscissa + "," + ordinate + ")";
+    @Override
+    public int hashCode() {
+        return (int) ((this.getAbscisse() * 31) + this.getOrdonnee());
     }
 
-    // Method to mesure the distance between two points
+    // Methode pour convertir la pointe en chaîne de caratere
+
+    @Override
+    public String toString() {
+        return "(" + abscisse + "," + ordonnee + ")";
+    }
+    
+
+    // Methode pour mesurer la distance entre deux pointes
     public double DistanceEntre2Points(Point point2) {
-        return Math.sqrt(Math.pow((abscissa - point2.getAbscissa()), 2) + Math.pow(ordinate - point2.getOrdinate(), 2));
+        return Math.sqrt(Math.pow((abscisse - point2.getAbscisse()), 2) + Math.pow(ordonnee - point2.getOrdonnee(), 2));
     }
 
-    // Methode to mesure the distance between the point and (0,0)
+    // Methode pour mesurer la disatnce entre la pointe et la pointe d'origine
     public double DistanceEntrePointDOrigine() {
         Point origine = new Point();
         return this.DistanceEntre2Points(origine);
